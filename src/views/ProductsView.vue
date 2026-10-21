@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ProductCard from '../components/ProductCard.vue'
 import AppIcon from '../components/AppIcon.vue'
+import FlowLines from '../components/FlowLines.vue'
 import { useI18n } from '../composables/useI18n.js'
 import { categories, products } from '../data/products.js'
 
@@ -24,7 +25,8 @@ const count = (id) => id === 'all' ? products.length : products.filter((p) => p.
 <template>
   <div>
     <section class="page-hero">
-      <div class="container">
+      <FlowLines :count="6" />
+      <div class="container" style="position:relative;z-index:1">
         <div class="crumb"><RouterLink to="/">HOME</RouterLink> / {{ t({ vi: 'SẢN PHẨM', en: 'PRODUCTS' }) }}</div>
         <span class="eyebrow">{{ t({ vi: 'Danh mục máy', en: 'Machine catalogue' }) }} · {{ products.length }} models</span>
         <h1 class="h-lg">{{ activeCat ? t(activeCat.name) : t({ vi: 'Toàn bộ thiết bị BMC PACK', en: 'The complete BMC PACK range' }) }}</h1>

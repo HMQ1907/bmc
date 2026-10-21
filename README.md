@@ -46,3 +46,18 @@ src/
   Ảnh nào không tải được sẽ tự hiện khung thay thế (không vỡ layout).
 - **Form báo giá**: hiện mở ứng dụng email với nội dung điền sẵn gửi tới info@bmcpack.com.
   Muốn gửi thẳng lên server (Formspree, API riêng…), sửa hàm `submit()` trong `src/components/QuoteForm.vue`.
+
+## Hiệu ứng chuyển động (lấy cảm hứng từ video tham khảo)
+
+- **Cuộn mượt có quán tính** — Lenis (`src/composables/useSmoothScroll.js`).
+- **Story cuộn điện ảnh** (`src/components/story/`) — trang chủ, ngay sau hero. Một section "ghim" cao 620vh, cuộn đến đâu cảnh chuyển đến đó:
+  1. Biển mây trôi uốn lượn (shader fbm domain-warp) — dùng luôn làm màn sương chuyển cảnh.
+  2. Hàng trăm vệt sáng cong hội tụ về đường chân trời rồi phun lên (năng lượng 4.0).
+  3. Dây chuyền sóng 7 công đoạn dạng hologram khung dây, camera bay theo đường cong; giấy chạy dọc dây chuyền.
+  4. Biển chấm sáng gợn sóng + nút báo giá.
+  Chỉnh mốc thời gian các cảnh trong `storyScene.js` (hàm `frame`) và `StoryScroll.vue` (mảng `acts`).
+- **Chữ hiện từng từ** (trồi lên + bỏ mờ) — `SplitText.vue`, dùng cho mọi tiêu đề section.
+- **Dải lụa SVG uốn lượn** có xung sáng chạy — `FlowLines.vue`.
+- **Ảnh gợn sóng như mặt nước khi rê chuột** — bộ lọc SVG `#bmc-wave` trong `App.vue` (class `wave-hover`).
+- **Parallax ảnh** — directive `v-parallax`.
+Tất cả tự tắt khi người dùng bật "giảm chuyển động" (prefers-reduced-motion).

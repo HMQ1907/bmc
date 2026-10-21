@@ -1,13 +1,13 @@
 <script setup>
 import { ref, watch } from 'vue'
-const props = defineProps({ src: String, alt: { type: String, default: '' }, label: String, eager: Boolean })
+const props = defineProps({ src: String, alt: { type: String, default: '' }, label: String, eager: Boolean, parallax: { type: Number, default: 0 } })
 const state = ref('loading')
 watch(() => props.src, () => { state.value = 'loading' })
 </script>
 
 <template>
   <div class="simg" :class="`is-${state}`">
-    <img v-if="src && state !== 'error'" :src="src" :alt="alt" :loading="eager ? 'eager' : 'lazy'" decoding="async"
+    <img v-if="src && state !== 'error'" v-parallax="parallax" :src="src" :alt="alt" :loading="eager ? 'eager' : 'lazy'" decoding="async"
          @load="state = 'ok'" @error="state = 'error'" />
     <div v-if="state !== 'ok'" class="simg__ph" aria-hidden="true">
       <svg viewBox="0 0 120 40" width="96"><path d="M0 20 Q7.5 4 15 20 T30 20 T45 20 T60 20 T75 20 T90 20 T105 20 T120 20" fill="none" stroke="currentColor" stroke-width="2" /></svg>

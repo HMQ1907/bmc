@@ -1,4 +1,5 @@
 <script setup>
+import FlowLines from '../components/FlowLines.vue'
 import QuoteForm from '../components/QuoteForm.vue'
 import AppIcon from '../components/AppIcon.vue'
 import { useI18n } from '../composables/useI18n.js'
@@ -15,7 +16,8 @@ const channels = [
 <template>
   <div>
     <section class="page-hero">
-      <div class="container">
+      <FlowLines :count="6" />
+      <div style="position:relative;z-index:1" class="container">
         <div class="crumb"><RouterLink to="/">HOME</RouterLink> / {{ t({ vi: 'LIÊN HỆ', en: 'CONTACT' }) }}</div>
         <span class="eyebrow">{{ t({ vi: 'Liên hệ & báo giá', en: 'Contact & quote' }) }}</span>
         <h1 class="h-lg">{{ t({ vi: 'Nói chuyện với kỹ sư của chúng tôi', en: 'Talk to our engineers' }) }}</h1>

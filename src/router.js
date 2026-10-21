@@ -14,9 +14,6 @@ export default createRouter({
   // Hash history: works on any static host without server rewrites
   history: createWebHashHistory(),
   routes,
-  scrollBehavior(to, from, saved) {
-    if (saved) return saved
-    if (to.hash && to.hash.length > 1 && !to.hash.startsWith('#/')) return { el: to.hash, top: 80, behavior: 'smooth' }
-    return { top: 0 }
-  }
+  // Scroll reset is handled in App.vue (after the page transition) via Lenis
+  scrollBehavior() { return false }
 })

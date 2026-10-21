@@ -8,6 +8,7 @@ import QuoteForm from '../components/QuoteForm.vue'
 import { useI18n } from '../composables/useI18n.js'
 import { categories, products, modelCode } from '../data/products.js'
 import { lineStages, company } from '../data/company.js'
+import { scrollToTarget } from '../composables/useSmoothScroll.js'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -17,10 +18,7 @@ const shot = ref(0)
 watch(() => route.params.slug, () => { shot.value = 0 })
 const related = computed(() => p.value ? products.filter((x) => x.category === p.value.category && x.slug !== p.value.slug).slice(0, 3) : [])
 const code = computed(() => p.value && (modelCode(p.value.name) || cat.value.code))
-const toQuote = () => {
-  const el = document.getElementById('quote')
-  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' })
-}
+const toQuote = () => scrollToTarget('#quote', { offset: -90 })
 </script>
 
 <template>

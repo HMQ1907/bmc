@@ -12,7 +12,7 @@ const code = computed(() => modelCode(props.product.name) || `${cat.value.code}-
 </script>
 
 <template>
-  <RouterLink :to="`/product/${product.slug}`" class="pc panel hud-corners">
+  <RouterLink :to="`/product/${product.slug}`" class="pc panel hud-corners wave-hover">
     <div class="pc__media">
       <SmartImg :src="product.image" :alt="product.name" :label="cat.short.en" />
       <span class="tag pc__cat">{{ cat.code }}</span>

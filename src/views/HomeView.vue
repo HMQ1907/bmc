@@ -9,6 +9,8 @@ import SmartImg from '../components/SmartImg.vue'
 import AppIcon from '../components/AppIcon.vue'
 import FluteDivider from '../components/FluteDivider.vue'
 import QuoteForm from '../components/QuoteForm.vue'
+import FlowLines from '../components/FlowLines.vue'
+import StoryScroll from '../components/story/StoryScroll.vue'
 import { useI18n } from '../composables/useI18n.js'
 import { stats, whyUs, techHighlights, projects, solutions, process, IMG } from '../data/company.js'
 import { categories, featuredProducts, categoryCover, products } from '../data/products.js'
@@ -65,6 +67,9 @@ const countByCat = computed(() => Object.fromEntries(categories.map((c) => [c.id
       <div class="hero__scroll mono" aria-hidden="true"><span></span>SCROLL</div>
     </section>
 
+    <!-- ============ CINEMATIC STORY ============ -->
+    <StoryScroll />
+
     <!-- ============ CATEGORIES ============ -->
     <section class="section">
       <div class="container">
@@ -72,7 +77,7 @@ const countByCat = computed(() => Object.fromEntries(categories.map((c) => [c.id
                      :title="t({ vi: 'Máy móc cho từng công đoạn của dây chuyền', en: 'Machinery for every stage of the line' })"
                      :sub="t({ vi: 'Sáu nhóm thiết bị, hơn 50 model — từ cuộn giấy đến thùng carton thành phẩm.', en: 'Six machine families, 50+ models — from mill roll to finished carton.' })" />
         <div class="cats">
-          <RouterLink v-for="(c, i) in categories" :key="c.id" :to="`/products/${c.id}`" class="cat panel hud-corners" :class="{ 'cat--big': i === 0 }" v-reveal="i * 70">
+          <RouterLink v-for="(c, i) in categories" :key="c.id" :to="`/products/${c.id}`" class="cat panel hud-corners wave-hover" :class="{ 'cat--big': i === 0 }" v-reveal="i * 70">
             <SmartImg :src="categoryCover(c.id)" :alt="t(c.name)" :label="c.short.en" class="cat__img" />
             <div class="cat__shade"></div>
             <div class="cat__body">
@@ -88,6 +93,7 @@ const countByCat = computed(() => Object.fromEntries(categories.map((c) => [c.id
 
     <!-- ============ LINE FLOW ============ -->
     <section class="section section--tight flow">
+      <FlowLines :count="8" />
       <div class="container flow__grid">
         <SectionHead :eyebrow="t({ vi: '02 — Quy trình', en: '02 — Process' })"
                      :title="t({ vi: 'Từ cuộn giấy đến tấm carton — 7 công đoạn, một hệ điều khiển.', en: 'Mill roll to finished sheet — 7 stages, one control system.' })"
@@ -126,9 +132,10 @@ const countByCat = computed(() => Object.fromEntries(categories.map((c) => [c.id
 
     <!-- ============ WHY ============ -->
     <section class="section why">
+      <FlowLines :count="5" tone="red" class="why__flow" />
       <div class="container why__grid">
         <div class="why__visual" v-reveal>
-          <SmartImg :src="`${IMG}/about/factory-main.webp`" alt="BMC PACK factory" label="Factory" class="why__img" />
+          <SmartImg :src="`${IMG}/about/factory-main.webp`" alt="BMC PACK factory" label="Factory" class="why__img" :parallax="0.08" />
           <div class="why__badge panel">
             <span class="mono">20,000 m²</span>
             <b>{{ t({ vi: 'Cơ sở sản xuất Quảng Đông', en: 'Guangdong production base' }) }}</b>
@@ -180,8 +187,8 @@ const countByCat = computed(() => Object.fromEntries(categories.map((c) => [c.id
         <SectionHead :eyebrow="t({ vi: '06 — Dự án', en: '06 — Installations' })"
                      :title="t({ vi: 'Được tin tưởng bởi các nhà máy bao bì toàn cầu', en: 'Trusted by packaging plants worldwide' })" />
         <div class="proj">
-          <article v-for="(p, i) in projects" :key="p.code" class="proj__i" v-reveal="i * 90">
-            <SmartImg :src="p.img" :alt="t(p.title)" :label="t(p.country)" class="proj__img" />
+          <article v-for="(p, i) in projects" :key="p.code" class="proj__i wave-hover" v-reveal="i * 90">
+            <SmartImg :src="p.img" :alt="t(p.title)" :label="t(p.country)" class="proj__img" :parallax="0.06" />
             <div class="proj__body">
               <span class="tag tag--red">{{ p.code }} · {{ t(p.country) }}</span>
               <h3>{{ t(p.title) }}</h3>
@@ -195,6 +202,7 @@ const countByCat = computed(() => Object.fromEntries(categories.map((c) => [c.id
     <!-- ============ CTA + FORM ============ -->
     <section class="section cta">
       <FluteDivider />
+      <FlowLines :count="6" class="cta__flow" />
       <div class="container cta__grid">
         <div v-reveal>
           <span class="eyebrow">{{ t({ vi: '07 — Bắt đầu', en: '07 — Get started' }) }}</span>
@@ -266,6 +274,9 @@ const countByCat = computed(() => Object.fromEntries(categories.map((c) => [c.id
 .cat:hover .cat__go { background: var(--red); border-color: var(--red); transform: rotate(45deg); }
 
 /* FLOW */
+.flow, .why, .cta { overflow: hidden; }
+.why__flow, .cta__flow { opacity: .7; }
+.flow__grid, .why__grid, .cta__grid { position: relative; z-index: 1; }
 .flow { background: linear-gradient(180deg, transparent, rgba(14,21,36,.5), transparent); }
 .flow__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: center; }
 .flow__grid :deep(.sh) { margin-bottom: 0; }

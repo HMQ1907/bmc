@@ -1,4 +1,5 @@
 <script setup>
+import FlowLines from '../components/FlowLines.vue'
 import SectionHead from '../components/SectionHead.vue'
 import SmartImg from '../components/SmartImg.vue'
 import AppIcon from '../components/AppIcon.vue'
@@ -16,7 +17,8 @@ const pillars = [
 <template>
   <div>
     <section class="page-hero">
-      <div class="container ab-hero">
+      <FlowLines :count="6" />
+      <div style="position:relative;z-index:1" class="container ab-hero">
         <div>
           <div class="crumb"><RouterLink to="/">HOME</RouterLink> / {{ t({ vi: 'GIỚI THIỆU', en: 'ABOUT' }) }}</div>
           <span class="eyebrow">{{ t({ vi: 'Về BMC PACK', en: 'About BMC PACK' }) }}</span>
